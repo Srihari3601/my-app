@@ -1,6 +1,6 @@
 {
   "name": "ev-dashboard",
-  "homepage": "https://github.com/Srihari3601/my-app",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

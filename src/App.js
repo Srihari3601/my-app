@@ -2,6 +2,16 @@ import React from 'react';
 import EVChart from './components/EVChart';
 import { useInView } from 'react-intersection-observer';
 import './App.css';
+import EVCountYear from './data/ev_count_by_year.json';
+import EVCountRange from './data/electric_range_distribution.json';
+// import EVCountFuelAlternative from './data/ev_by_clean_alternative.json';
+// import EVCountCountry from './data/ev_by_country.json';
+
+
+
+
+
+
 
 const Section = ({ title, description, children, className }) => {
   const { ref, inView } = useInView({
@@ -37,7 +47,7 @@ const App = () => {
           description="This chart shows the distribution of electric vehicles based on their model year, giving insights into the evolution of electric vehicle adoption over time."
           className="full-width"
         >
-          <EVChart dataUrl="/ev_count_by_year.json" label="EV Count by Model Year" chartType="line" />
+          <EVChart dataUrl={EVCountYear} label="EV Count by Model Year" chartType="line" />
         </Section>
 
         <div className="two-column">
@@ -53,7 +63,7 @@ const App = () => {
             description="This bar chart displays the distribution of electric vehicles based on their electric range. It provides insights into the typical range capabilities of different EV models."
             className="chart-container"
           >
-            <EVChart dataUrl="/electric_range_distribution.json" label="Electric Range Distribution" chartType="bar" />
+            <EVChart dataUrl={EVCountRange} label="Electric Range Distribution" chartType="bar" />
           </Section>
         </div>
 
