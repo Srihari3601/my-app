@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Srihari3601/my-app/static/css/main.38ec86b7.css",
+    "main.js": "/Srihari3601/my-app/static/js/main.55a11c90.js",
+    "static/js/453.25a7332d.chunk.js": "/Srihari3601/my-app/static/js/453.25a7332d.chunk.js",
+    "index.html": "/Srihari3601/my-app/index.html",
+    "main.38ec86b7.css.map": "/Srihari3601/my-app/static/css/main.38ec86b7.css.map",
+    "main.55a11c90.js.map": "/Srihari3601/my-app/static/js/main.55a11c90.js.map",
+    "453.25a7332d.chunk.js.map": "/Srihari3601/my-app/static/js/453.25a7332d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38ec86b7.css",
+    "static/js/main.55a11c90.js"
+  ]
+}
