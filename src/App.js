@@ -34,6 +34,12 @@ const App = () => {
 
       <div className="contents">
         <Section
+          title="Introduction to Electric Vehicles (EVs)"
+          description="Electric vehicles (EVs) are vehicles that are either partially or fully powered on electric power. They have the potential to significantly reduce greenhouse gas emissions and dependence on fossil fuels. The future of EVs looks promising with advancements in battery technology, increased range, and growing infrastructure for charging stations. This dashboard provides insights into the current state and trends of EV adoption."
+          className="full-width"
+        />
+
+        <Section
           title="EV Count by Make"
           description="This chart displays the number of electric vehicles by their make. It helps you understand which brands are leading in electric vehicle production."
           className="full-width"
@@ -105,7 +111,7 @@ const App = () => {
           className="full-width"
         >
           <EVChart data={EVCountModel} label="EV Model Distribution" chartType="horizontalBar" />
-        </Section>
+         </Section>
       </div>
     </div>
   );

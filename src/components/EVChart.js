@@ -15,7 +15,6 @@ import {
     Filler,
 } from 'chart.js';
 
-// Register the necessary components
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -44,6 +43,17 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
       }
     };
 
+    const generateColors = (numColors) => {
+      const colors = [];
+      for (let i = 0; i < numColors; i++) {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        colors.push(`rgba(${r}, ${g}, ${b}, 0.9)`);
+      }
+      return colors;
+    };
+
     const processChartData = (data) => {
       if (chartType === 'bubble') {
         setChartData({
@@ -65,6 +75,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
       } else {
         const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County);
         const values = data.map(item => item.Count);
+        const backgroundColors = generateColors(values.length);
 
         setChartData({
           labels: labels,
@@ -79,7 +90,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)',
-              ] : 'rgba(75, 192, 192, 1)',
+              ] : backgroundColors,
               hoverBackgroundColor: '#808080',
               borderWidth: 1,
               borderColor: '#ccc',

@@ -1,7 +1,5 @@
-
 h1 {
   text-align: center;
-  /* margin-bottom: 40px; */
   margin-top: 0;
 }
 
@@ -59,7 +57,6 @@ p {
   color: #666;
   line-height: 1.5;
 }
-
 
 .full-width {
   width: 100%;
