@@ -29,7 +29,7 @@ const App = () => {
           description="This chart displays the number of electric vehicles by their make. It helps you understand which brands are leading in electric vehicle production."
           className="full-width"
         >
-          <EVChart dataUrl="/ev_count_by_make.json" label="EV Count by Make" chartType="bar" />
+          <EVChart dataUrl="/my-app/ev_count_by_make.json" label="EV Count by Make" chartType="bar" />
         </Section>
 
         <Section
