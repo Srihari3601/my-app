@@ -30,14 +30,21 @@ ChartJS.register(
     Filler // For Bubble charts
 );
 
-const EVChart = ({ dataUrl, label, chartType }) => {
+const EVChart = ({ data, dataUrl, label, chartType }) => {
   const [chartData, setChartData] = useState({ datasets: [] });
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(dataUrl);
-      const data = await response.json();
+      if (data) {
+        processChartData(data);
+      } else if (dataUrl) {
+        const response = await fetch(dataUrl);
+        const fetchedData = await response.json();
+        processChartData(fetchedData);
+      }
+    };
 
+    const processChartData = (data) => {
       if (chartType === 'bubble') {
         setChartData({
           datasets: [
@@ -83,7 +90,7 @@ const EVChart = ({ dataUrl, label, chartType }) => {
     };
 
     fetchData();
-  }, [dataUrl, label, chartType]);
+  }, [data, dataUrl, label, chartType]);
 
   const options = {
     scales: {
@@ -105,7 +112,7 @@ const EVChart = ({ dataUrl, label, chartType }) => {
     case 'line':
       return <Line data={chartData} options={options} />;
     case 'horizontalBar':
-      return <Bar data={chartData} options={options} />;
+      return <Bar data={chartData} options={{ ...options, indexAxis: 'y' }} />;
     case 'bubble':
       return <Bubble data={chartData} options={options} />;
     default:
