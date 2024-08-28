@@ -55,7 +55,7 @@ const App = () => {
             description="This horizontal bar chart visualizes the distribution of electric vehicles across different cities, helping identify areas with higher adoption rates."
             className="chart-container"
           >
-            <EVChart data={EVCountCity} label="EV Count by City" chartType="horizontalBar" />
+            <EVChart data={EVCountCity} label="EV Count by City" chartType="bar" />
           </Section>
           <Section
             title="Electric Range Distribution"
@@ -101,10 +101,10 @@ const App = () => {
 
         <Section
           title="EV Model Distribution"
-          description="This bubble chart visualizes the distribution of electric vehicles by model, with the bubble size indicating the number of vehicles for each model."
+          description="This Horizontal Bar chart visualizes the distribution of electric vehicles by model, with the bubble size indicating the number of vehicles for each model."
           className="full-width"
         >
-          <EVChart data={EVCountModel} label="EV Model Distribution" chartType="bubble" />
+          <EVChart data={EVCountModel} label="EV Model Distribution" chartType="horizontalBar" />
         </Section>
       </div>
     </div>

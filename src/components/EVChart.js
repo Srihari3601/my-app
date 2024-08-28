@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Pie, Line, Doughnut, Bubble } from 'react-chartjs-2';
+import { Bar, Pie, Line, Doughnut } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -15,7 +15,6 @@ import {
     Filler,
 } from 'chart.js';
 
-// Register the necessary components
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -26,8 +25,8 @@ ChartJS.register(
     PointElement,
     LineElement,
     ArcElement,
-    RadialLinearScale, // For Bubble charts
-    Filler // For Bubble charts
+    RadialLinearScale,
+    Filler 
 );
 
 const EVChart = ({ data, dataUrl, label, chartType }) => {
@@ -44,27 +43,22 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
       }
     };
 
+    const generateColors = (numColors) => {
+      const colors = [];
+      for (let i = 0; i < numColors; i++) {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        colors.push(`rgba(${r}, ${g}, ${b}, 0.9)`);
+      }
+      return colors;
+    };
+
     const processChartData = (data) => {
-      if (chartType === 'bubble') {
-        setChartData({
-          datasets: [
-            {
-              label: label,
-              data: data.map(item => ({
-                x: Math.random() * 100, 
-                y: item.Count, // The count of vehicles
-                r: Math.sqrt(item.Count) * 5, // Bubble size based on count, scaled
-              })),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-              hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
-            },
-          ],
-        });
-      } else {
+       
         const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County);
         const values = data.map(item => item.Count);
+        const backgroundColors = generateColors(values.length);
 
         setChartData({
           labels: labels,
@@ -79,14 +73,14 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)',
-              ] : 'rgba(75, 192, 192, 1)',
+              ] : backgroundColors,
               hoverBackgroundColor: '#808080',
               borderWidth: 1,
               borderColor: '#ccc',
             },
           ],
         });
-      }
+      
     };
 
     fetchData();
@@ -112,9 +106,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
     case 'line':
       return <Line data={chartData} options={options} />;
     case 'horizontalBar':
-      return <Bar data={chartData} options={{ ...options, indexAxis: 'y' }} />;
-    case 'bubble':
-      return <Bubble data={chartData} options={options} />;
+      return <Bar data={chartData} options={{  indexAxis: 'y' }} />;
     default:
       return <Bar data={chartData} options={options} />;
   }

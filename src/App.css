@@ -7,7 +7,7 @@ h1 {
 
 .section {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(20px);
   transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 
@@ -21,9 +21,12 @@ h1 {
   background-color: rgb(0, 136, 79);
   color: antiquewhite;
   height: 80px;
-  /* animation: fadeIn 1s ease-out forwards; */
-  position:sticky;
-  display: inline-block;
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
 }
 
 @keyframes fadeIn {
@@ -57,7 +60,7 @@ p {
   line-height: 1.5;
 }
 
-/* Full-width sections for bar and line charts */
+
 .full-width {
   width: 100%;
 }
@@ -69,7 +72,7 @@ p {
 }
 
 .chart-container {
-  width: 48%; /* Two charts per row, adjust this to change spacing */
+  width: 48%; 
   margin-bottom: 60px;
 }
 
