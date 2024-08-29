@@ -20,20 +20,20 @@ h1 {
   color: antiquewhite;
   height: 80px;
   position: sticky;
-  top: 3px;
+  top: 0px;
   z-index: 1000; 
   font-variant: small-caps;
   display: flex;
   align-items: center; 
   justify-content: center;
-  transition: width 0.2s linear ease-in-out;
+  /* transition: width 0.3s ease */
 }
 .heading.scrolled-past {
   border-radius: 40px;
   width: 60%;
   margin: auto;
-  opacity: 80%;
-  transition: width 0.9s ease-out;
+  top:3px;
+  transition: width 0.9s ease-out, top 0.9s ease-out;
 }
 
 .introduction {
