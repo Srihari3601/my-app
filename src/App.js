@@ -11,6 +11,7 @@ import EVCountCity from './data/ev_count_by_city.json';
 import EVCountMake from './data/ev_count_by_make.json';
 import EVCountModel from './data/ev_model.json';
 import EVCountType from './data/ev_type_count.json';
+import { useState, useEffect } from 'react';
 
 const Section = ({ title, description, children, className }) => {
   const { ref, inView } = useInView({
@@ -28,15 +29,36 @@ const Section = ({ title, description, children, className }) => {
 };
 
 const App = () => {
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsScrolledPast(!entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const introSection = document.querySelector('.introduction');
+    if (introSection) {
+      observer.observe(introSection);
+    }
+
+    return () => {
+      if (introSection) {
+        observer.unobserve(introSection);
+      }
+    };
+  }, []);
   return (
     <div className="App">
-      <h1 className='heading'>EV Population Dashboard</h1>
+      <h1 className={`heading  ${isScrolledPast ? 'scrolled-past' : ''}`}>EV Population Dashboard</h1>
 
       <div className="contents">
         <Section
           title="Introduction to Electric Vehicles (EVs)"
           description="Electric vehicles (EVs) are vehicles that are either partially or fully powered on electric power. They have the potential to significantly reduce greenhouse gas emissions and dependence on fossil fuels. The future of EVs looks promising with advancements in battery technology, increased range, and growing infrastructure for charging stations. This dashboard provides insights into the current state and trends of EV adoption."
-          className="full-width"
+          className="introduction full-width"
         />
 
         <Section
