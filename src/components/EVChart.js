@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Pie, Line, Doughnut, Bubble } from 'react-chartjs-2';
+import { Bar, Pie, Line, Doughnut } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,8 +11,6 @@ import {
     PointElement,
     LineElement,
     ArcElement,
-    RadialLinearScale,
-    Filler,
 } from 'chart.js';
 
 ChartJS.register(
@@ -25,8 +23,6 @@ ChartJS.register(
     PointElement,
     LineElement,
     ArcElement,
-    RadialLinearScale, // For Bubble charts
-    Filler // For Bubble charts
 );
 
 const EVChart = ({ data, dataUrl, label, chartType }) => {
@@ -55,25 +51,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
     };
 
     const processChartData = (data) => {
-      if (chartType === 'bubble') {
-        setChartData({
-          datasets: [
-            {
-              label: label,
-              data: data.map(item => ({
-                x: Math.random() * 100, 
-                y: item.Count, // The count of vehicles
-                r: Math.sqrt(item.Count) * 5, // Bubble size based on count, scaled
-              })),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-              hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
-            },
-          ],
-        });
-      } else {
-        const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County ||item.CAFV) ;
+        const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County || item.CAFV) ;
         const values = data.map(item => item.Count);
         const backgroundColors = generateColors(values.length);
 
@@ -102,7 +80,6 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
             },
           ],
         });
-      }
     };
 
     fetchData();
@@ -111,7 +88,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
   const options = {
     scales: {
       x: {
-        type: chartType === 'bubble' ? 'linear' : 'category',
+        type: 'category',
         beginAtZero: true,
       },
       y: {
@@ -129,8 +106,6 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
       return <Line data={chartData} options={options} />;
     case 'horizontalBar':
       return <Bar data={chartData} options={options} />;
-    case 'bubble':
-      return <Bubble data={chartData} options={options} />;
     default:
       return <Bar data={chartData} options={options} />;
   }
