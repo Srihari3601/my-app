@@ -73,7 +73,7 @@ const EVChart = ({ data, dataUrl, label, chartType }) => {
           ],
         });
       } else {
-        const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County);
+        const labels = data.map(item => item.Make || item['Model Year'] || item.City || item['Electric Range'] || item['Electric Vehicle Type'] || item.Model || item['Legislative District'] || item.County ||item.CAFV) ;
         const values = data.map(item => item.Count);
         const backgroundColors = generateColors(values.length);
 
